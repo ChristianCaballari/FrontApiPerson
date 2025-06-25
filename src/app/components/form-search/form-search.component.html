@@ -1,0 +1,37 @@
+<ion-card class="form-card">
+  <ion-card-header>
+    <ion-card-title>Buscar Usuario</ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+    <form [formGroup]="formBusqueda" (ngSubmit)="onSubmit()">
+      
+      <ion-item>
+        <ion-label position="floating">Buscar por</ion-label>
+        <ion-select formControlName="filtro" interface="popover" (ionChange)="onFiltroChange($event)">
+          <ion-select-option value="nombre">Nombre</ion-select-option>
+          <ion-select-option value="apellido">Apellido</ion-select-option>
+          <ion-select-option value="email">Email</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <app-field-error [controlForm]="formBusqueda.get('filtro')"></app-field-error>
+
+      <ion-item>
+        <ion-label position="floating">Valor</ion-label>
+        <ion-input 
+          [type]="inputType"
+          formControlName="valor"
+          [inputmode]="inputType === 'email' ? 'email' : 'text'"
+          clearInput>
+        </ion-input>
+      </ion-item>
+      <app-field-error [controlForm]="formBusqueda.get('valor')"></app-field-error>
+
+      <ion-button expand="block" type="submit" [disabled]="formBusqueda.invalid" class="ion-margin-top">
+        <ion-icon name="search-outline" slot="start"></ion-icon>
+        Buscar
+      </ion-button>
+
+    </form>
+  </ion-card-content>
+</ion-card>
